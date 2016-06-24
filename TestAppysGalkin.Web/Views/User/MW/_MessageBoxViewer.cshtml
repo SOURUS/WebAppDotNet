@@ -1,0 +1,28 @@
+﻿<script type="text/ng-template" id="MSBBOXVIEW">
+    
+    <table class="grey_table grey-table-row-hover">
+        <thead>
+            <tr>
+                <th ng-show="ngDialogData.Flag==true">Отправлено пользователю</th>
+                <th ng-hide="ngDialogData.Flag==true">Получено от пользователя</th>
+                <th>Текст сообщения</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr ng-repeat="item in ngDialogData.Result">
+                <td>
+                    {{item.Name}}
+                </td>
+                <td>
+                    {{item.Text}}
+                </td>
+            </tr>
+        </tbody>    
+    </table>
+
+    <div class="otstup20"></div>
+    <CENTER>
+        <button style="float:none;" type="button" focus-me class="ngdialog-button ngdialog-button-primary" ng-click="closeDialog()">Закрыть</button>
+    </CENTER>
+</script>

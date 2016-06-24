@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Testierung</title>
+
+    <link rel="stylesheet/less" type="text/css" href="~/Content/Less/Site.less" />
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/slider/angular.rangeSlider.css" />
+    <link href="~/Content/ngDialog/ngDialog.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/ngDialog/ngDialog-theme-default.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/nya-bootstrap-select/nya-bs-select.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/Shared/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+    <script src="~/Scripts/Libraries/JQuery/jquery-1.10.2.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/Libraries/Bootstrap/bootstrap.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/Libraries/Less/less.min.js" type="text/javascript"></script>
+
+    <script src="~/Scripts/Libraries/AngularJS/Source/angular.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/Libraries/AngularJS/ngRoute/angular-route.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/Shared/CommonModule.js" type="text/javascript"></script>
+    <script src="~/Scripts/Libraries/AngularJS/ngAnimate/angular-animate.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/Libraries/AngularJS/UI/ui-bootstrap-1.1.2.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/Libraries/AngularJS/ngDialog/ngDialog.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/Libraries/AngularJS/Paging/dirPagination.js" type="text/javascript"></script>
+    <script src="~/Scripts/Libraries/Bootstrap/nya-bootstrap-select/nya-bs-select.js" type="text/javascript"></script>
+    <script src="~/Scripts/Libraries/AngularJS/Slider/angular.rangeSlider.js" type="text/javascript"></script> 
+
+</head>
+<body>
+    <div id="core_body" ng-app="StoreApp">
+        <div class="navbar navbar-inverse navbar-fixed-top navbar-right">
+            <div class="container">
+                <div class="navbar-header navbar-right">
+                    @if (Session["UserProfile"] != null)
+                    {
+                        @Html.ActionLink("Ваш личный кабинет", "Index", "User", new { area = "" }, new { @class = "navbar-brand" })
+                        @Html.ActionLink("Выйти", "Logout", "Security", new { area = "" }, new { @class = "navbar-brand" })
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Залогиниться", "Login", "Security", new { area = "" }, new { @class = "navbar-brand" })
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid body-content">
+            @RenderBody()
+            <hr />
+            <footer>
+                <span style="float:right;">Created by Galkin Alexandr</span>
+            </footer>
+        </div>
+    </div>
+</body>
+</html>

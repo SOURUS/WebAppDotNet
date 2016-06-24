@@ -1,0 +1,115 @@
+﻿@{
+    ViewBag.Title = "Главная страница";
+}
+
+<script src="~/Scripts/Pages/Home/HomeIndexController.js"></script>
+<script src="~/Scripts/Shared/angular-locale_ru-ru.js"></script>
+
+<div id="main" ng-controller="IndexController" ng-cloak>
+
+    <div class="row">
+        <div class="col-md-3">
+            <div class="sidebar-nav">
+                <div class="navbar navbar-default" role="navigation">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <span class="visible-xs navbar-brand">Меню</span>
+                    </div>
+                    
+                    <div class="navbar-collapse sidebar-navbar-collapse collapse in" style="height: auto; overflow:hidden;">
+                        <h3>Наушники</h3>
+
+                        <div>
+                            <h5>Производитель</h5>
+                            <ol class="nya-bs-select" style="position:relative; width:100%" multiple ng-model="Product_InfoSearch.SelectedProcedures" title="Выборка" data-selected-text-format="count>0" data-actions-box="true">
+                                <li nya-bs-option="option in Producers" value="option.ProducerId"><a>{{option.Name}}<span class="fa fa-square-o default-mark"></span><span class="fa fa-check-square-o check-mark"></span></a></li>
+                            </ol>
+                        </div>
+                        
+                        <div>
+                            <h5>Портативность</h5>
+                            <ol class="nya-bs-select" style="position:relative; width:100%" ng-model="Product_InfoSearch.isPortable" title="Выборка">
+                                <li data-value="{{0}}" class="nya-bs-option"><a>Нет</a></li>
+                                <li data-value="{{1}}" class="nya-bs-option"><a>Да</a></li>
+                            </ol>
+                        </div>
+                        
+                        <div>
+                            <h5>Диапозон цен</h5>
+                            <div range-slider min="SliderSetting.min" max="SliderSetting.max"
+                                 model-min="Product_InfoSearch.Price.minValue"
+                                 model-max="Product_InfoSearch.Price.maxValue"
+                                 attach-handle-values="true">
+                            </div>
+                        </div>
+                    <div class="otstup10"></div>
+                        <div>
+                            <h5>Количество динамиков</h5>
+                            <input class="custom-input" type="number" min="0" step="1" data-ng-model="Product_InfoSearch.DynamicQuantity" />
+                        </div>
+                    </div><!--/.nav-collapse -->
+                    <div class="otstup10"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-9">
+            <div class="PagingFilter">
+                <div class="value">
+                    Показать
+                    <ol class="nya-bs-select"style="display:inline-block; width:inherit;" ng-model="viewby" ng-change="setItemsPerPage(viewby);">
+                        <li nya-bs-option="option in Variants"><a>{{option}}</a></li>
+                    </ol>
+                </div>
+
+                <div class="paging">
+                    <dir-pagination-controls></dir-pagination-controls>
+                </div>
+            </div>
+        </div>
+
+        <div class="cheat">cheat</div>
+
+        <div class="col-md-9">
+            <ul id="HD_container">
+                <li dir-paginate="item in Result | filter:HeadPhoneFilter | itemsPerPage: Paging.itemsPerPage" current-page="Paging.currentPage">
+
+                    <div class="imgbox">
+                        <img data-ng-src="{{item.Image}}" />
+                    </div>
+
+                    <div class="Producer">
+                        {{item.Producer.Name}}
+                    </div>
+
+                    <div class="Model">
+                        {{item.Name}}
+                    </div>
+
+                    <div class="Price">
+                        {{item.Price}} руб.
+                    </div>
+
+                    <div class="Order">
+                        <button type="button" class="btn btn-primary btn-xs" ng-click="GoOrder(item)">Заказать</button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    angular.module("StoreApp").config(
+    function (appConfigProvider) {
+        appConfigProvider.set({
+            Model: @Html.Raw(Json.Encode(Model)),
+        });}
+    );
+</script>

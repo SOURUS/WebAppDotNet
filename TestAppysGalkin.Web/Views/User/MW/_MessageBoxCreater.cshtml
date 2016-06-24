@@ -1,0 +1,26 @@
+﻿<script type="text/ng-template" id="MSBBOX">
+        <table class="addTable">
+            <tr>
+                <td>
+                    Логин пользователя
+                </td>
+                <td>
+                    <input type="text" class="custom-input" ng-model="NewMessage.ToUser" />
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    Текст сообщения
+                </td>
+                <td>
+                    <textarea rows="5" ng-model="NewMessage.Text"></textarea>
+                </td>
+            </tr>
+        </table>
+        <div class="otstup20"></div>
+    <CENTER>
+        <button style="float:none;" type="button" focus-me class="ngdialog-button ngdialog-button-primary" ng-click="SendMessage()">Отправить</button>
+        <button style="float:none;" type="button" focus-me class="ngdialog-button ngdialog-button-primary" ng-click="closeDialog()">Отмена</button>
+    </CENTER>
+</script>

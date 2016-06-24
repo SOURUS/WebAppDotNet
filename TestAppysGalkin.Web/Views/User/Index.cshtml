@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "Личный кабинет";
+}
+
+<script src="~/Scripts/Pages/User/UserIndexController.js"></script>
+
+<div id="main" ng-controller="IndexController" ng-cloak>
+    <div class="col-sm-3">
+        <div class="sidebar-nav">
+            <div class="navbar navbar-default" role="navigation">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <span class="visible-xs navbar-brand">Меню</span>
+                </div>
+                <div class="navbar-collapse sidebar-navbar-collapse collapse in" style="height: auto; overflow:hidden;">
+                    <ul id="UserMenu">
+                        <li><a ng-click="ReceivedMes()">Полученные сообщения</a></li>
+
+                        <li><a ng-click="SentMes()">Отправленные сообщения</a></li>
+
+                        <li><a ng-click="MessageBox()">Написать сообщение</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <center>
+                <h2>Ваша личная страница!</h2>
+            </center>
+            <span style="float:right"><h3>Перейти на @Html.ActionLink("Главную страницу", "Index", "Home")</h3></span>
+            
+        </div>
+    </div>
+</div>
+
+@Html.Partial("MW/_MessageBoxCreater")
+@Html.Partial("MW/_MessageBoxViewer")
+
