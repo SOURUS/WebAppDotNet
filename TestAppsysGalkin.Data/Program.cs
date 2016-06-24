@@ -27,7 +27,7 @@ namespace TestAppsysGalkin.Data
                 db.Database.Initialize(true);
             }
 
-            Console.WriteLine("Деплой базы успешно выполнен, для продолжение нажмите Enter");
+            Console.WriteLine("Деплой базы успешно выполнен, для продолжения нажмите Enter");
             Console.ReadLine();
         }
     }

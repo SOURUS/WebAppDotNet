@@ -33,9 +33,9 @@
                         
                         <div>
                             <h5>Портативность</h5>
-                            <ol class="nya-bs-select" style="position:relative; width:100%" ng-model="Product_InfoSearch.isPortable" title="Выборка">
-                                <li data-value="{{0}}" class="nya-bs-option"><a>Нет</a></li>
-                                <li data-value="{{1}}" class="nya-bs-option"><a>Да</a></li>
+                            <ol class="nya-bs-select" style="position:relative; width:100%" ng-model="Product_InfoSearch.isPortable" title="Выборка" data-selected-text-format="count>0" multiple >
+                                <li data-value="{{0}}" class="nya-bs-option"><a>Нет<span class="fa fa-square-o default-mark"></span><span class="fa fa-check-square-o check-mark"></span></a></li>
+                                <li data-value="{{1}}" class="nya-bs-option"><a>Да<span class="fa fa-square-o default-mark"></span><span class="fa fa-check-square-o check-mark"></span></a></li>
                             </ol>
                         </div>
                         

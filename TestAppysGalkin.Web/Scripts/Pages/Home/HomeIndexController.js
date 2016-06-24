@@ -36,7 +36,7 @@
             },
             SelectedProcedures: [],
             DynamicQuantity: null,
-            isPortable: null,
+            isPortable: [],
         };
 
         $scope.FindResult = function () {
@@ -49,9 +49,9 @@
         
         $scope.FindResult();                    //Загрузим данные сразу при загрузке страницы
 
-        $scope.viewby = [3];                    // все для клиентского пэйджинга
+        $scope.viewby = [4];                    // все для клиентского пэйджинга
         $scope.Paging = null;
-        $scope.Variants = [3, 5, 10, 1000];
+        $scope.Variants = [4, 8, 100];
 
         function SetPaging() {
             $scope.Paging = {
@@ -78,8 +78,9 @@
             if ($scope.Product_InfoSearch.DynamicQuantity != null && $scope.Product_InfoSearch.DynamicQuantity != item.HeadPhone.DynamicQuantity)
                 return false;
 
-            if ($scope.Product_InfoSearch.isPortable != null && $scope.Product_InfoSearch.isPortable != item.HeadPhone.IsPortable)
-                return false;
+            if ($scope.Product_InfoSearch.isPortable.length > 0)
+                if (jQuery.grep($scope.Product_InfoSearch.isPortable, function (dt) { return dt == item.HeadPhone.IsPortable }).length <= 0)
+                    return false;
 
             return true;
         };
