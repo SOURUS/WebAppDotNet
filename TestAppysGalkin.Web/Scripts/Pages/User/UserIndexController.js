@@ -2,12 +2,29 @@
     "use strict";
 
     angular
-        .module('StoreApp', ['ngAnimate', 'ngRoute', 'ngDialog', 'commonModule', 'ui.bootstrap'])
+        .module('StoreApp', ['ngAnimate', 'ngRoute', 'ngDialog', 'commonModule', 'ui.bootstrap', 'SinglrModule'])
         .controller('IndexController', IndexController)
         .factory('MessageService', MessageService)
 
-    IndexController.$inject = ['$scope', 'ngDialog', '$filter', '$timeout', 'MessageService'];
-    function IndexController($scope, ngDialog, $filter, $timeout, MessageService) {
+    IndexController.$inject = ['$scope', 'ngDialog', '$filter', '$timeout', 'MessageService', 'SignalrSvc', '$q'];
+    function IndexController($scope, ngDialog, $filter, $timeout, MessageService, SignalrSvc, $q) {
+
+        var SingalRWait = SignalrSvc.init();
+
+        var updateGreetingMessage = function (text) {
+            alert(text)
+        }
+
+        $q.all(SingalRWait).then(function () {
+            SignalrSvc.sendRequest();
+
+            $scope.$parent.$on("updateMessages", function (e, message) {
+                $scope.$apply(function () {
+                    updateGreetingMessage(message)
+                });
+            });
+        });
+
 
         $scope.NewMessage = {
             ToUser: "",

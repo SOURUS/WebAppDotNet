@@ -21,13 +21,15 @@ namespace TestAppsysGalkin.Data.Context
             var Users = new List<ApplicationUser>
             {
                 new ApplicationUser {  UserName = "user1", PasswordHash = passwordHash.HashPassword("12345"), SecurityStamp="randomString" },
-                new ApplicationUser {  UserName = "user2", PasswordHash = passwordHash.HashPassword("qwerty"), SecurityStamp="Cuz its necessary"}
+                new ApplicationUser {  UserName = "user2", PasswordHash = passwordHash.HashPassword("qwerty"), SecurityStamp="Cuz its necessary"},
+                new ApplicationUser {  UserName = "user3", PasswordHash = passwordHash.HashPassword("asdfgh"), SecurityStamp="for EF"},
             };
 
             var UserProfiles = new List<UserProfile>
             {
                 new UserProfile { UserId = Users[0].Id},
-                new UserProfile { UserId = Users[1].Id }
+                new UserProfile { UserId = Users[1].Id },
+                new UserProfile { UserId = Users[2].Id },
             };
             
             Users.ForEach(s => context.Users.Add(s));

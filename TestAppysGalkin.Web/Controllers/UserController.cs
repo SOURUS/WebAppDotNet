@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.SignalR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,7 @@ using System.Web;
 using System.Web.Mvc;
 using TestAppsysGalkin.Data.Model;
 using TestAppsysGalkin.Repository.Interfaces;
+using TestAppysGalkin.Web.Hubs;
 using TestAppysGalkin.Web.Models.Authorize;
 using TestAppysGalkin.Web.Models.Results;
 using TestAppysGalkin.Web.Models.Shared;
@@ -21,11 +23,13 @@ namespace TestAppysGalkin.Web.Controllers
     {
         private readonly IUserRepository _user;
         private readonly IMessageRepository _message;
+        private readonly MainHub _hubContext;
 
         public UserController(IUserRepository user, IMessageRepository message)
         {
             _user = user;
             _message = message;
+            _hubContext = new MainHub();
         }
 
         [Meine_Authentifizierung]
@@ -77,6 +81,7 @@ namespace TestAppysGalkin.Web.Controllers
             {
                 var user = await _user.UserManager.FindByIdAsync(User.Identity.GetUserId());
                 _message.CreateMessage(user.Id, ToUserName, msg);
+                _hubContext.SendMessage(ToUserName, String.Format("Пользователь {0} отправил вам сообщение!", user.UserName));
                 return Json(new SuccessResponce("Сообщение успешно отправлено!"));
             }
             catch (Exception Ex)

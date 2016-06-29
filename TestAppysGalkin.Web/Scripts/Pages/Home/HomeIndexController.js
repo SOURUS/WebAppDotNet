@@ -2,7 +2,7 @@
     "use strict";
 
     angular
-        .module('StoreApp', ['ngAnimate', 'ngRoute', 'ngDialog', 'commonModule', 'ui.bootstrap', 'nya.bootstrap.select', 'angularUtils.directives.dirPagination', 'ui-rangeSlider'])
+        .module('StoreApp', ['ngAnimate', 'ngRoute', 'ngDialog', 'commonModule', 'ui.bootstrap', 'nya.bootstrap.select', 'angularUtils.directives.dirPagination', 'ui-rangeSlider', 'SinglrModule'])
         .controller('IndexController', IndexController)
         .factory('ProductService', ProductService)
         .provider('appConfig', appConfigProvider)
@@ -17,8 +17,24 @@
         };
     };
 
-    IndexController.$inject = ['$scope', 'ngDialog', '$filter', '$timeout', 'appConfig', 'ProductService'];
-    function IndexController($scope, ngDialog, $filter, $timeout, config, ProductService) {
+    IndexController.$inject = ['$scope', 'ngDialog', '$filter', '$timeout', 'appConfig', 'ProductService', 'SignalrSvc', '$q'];
+    function IndexController($scope, ngDialog, $filter, $timeout, config, ProductService, SignalrSvc, $q) {
+
+        var SingalRWait = SignalrSvc.init();
+
+        var updateGreetingMessage = function (text) {
+            alert(text)
+        }
+
+        $q.all(SingalRWait).then(function () {
+            SignalrSvc.sendRequest();
+
+            $scope.$parent.$on("updateMessages", function (e, message) {
+                $scope.$apply(function () {
+                    updateGreetingMessage(message)
+                });
+            });
+        });
 
         $scope.Producers = config.Model.Data;   // список производителей
         $scope.Result = [];                     // список найденных товаров

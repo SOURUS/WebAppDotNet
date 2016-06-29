@@ -4,6 +4,7 @@ using Microsoft.Owin;
 using Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.SignalR;
 
 [assembly: OwinStartup(typeof(TestAppysGalkin.Web.Startup))]
 
@@ -19,6 +20,8 @@ namespace TestAppysGalkin.Web
                 LoginPath = new PathString("/Security/Login")
             });
 
+            app.MapSignalR();
+            GlobalHost.HubPipeline.RequireAuthentication();
         }
     }
 }
