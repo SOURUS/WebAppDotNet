@@ -21,12 +21,13 @@ namespace TestAppsysGalkin.Repository
 
         public IEnumerable<Message> SentMessages(string UserId)
         {
-            return _context.Messages.Where(m => m.FromUserId == UserId).ToList();
+            return _context.Messages.Where(m => m.FromUserId == UserId).ToArray();
         }
 
         public IEnumerable<Message> ReceivedMessages(string UserId)
         {
-            return _context.Messages.Where(m => m.ToUserId == UserId).ToList();
+            var res = _context.Messages.Where(m => m.ToUserId == UserId).ToArray();
+            return res;
         }
 
         public void CreateMessage(string FromUserId, string ToUserName, string msg)

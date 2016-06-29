@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.IO;
@@ -15,11 +16,12 @@ namespace TestAppsysGalkin.Data.Context
 
         protected override void Seed(MainContext context)
         {
+            var passwordHash = new PasswordHasher();
             //base.Seed(context);
             var Users = new List<ApplicationUser>
             {
-                new ApplicationUser {  UserName = "user1", PasswordHash = "12345"},
-                new ApplicationUser {  UserName = "user2", PasswordHash = "qwerty"}
+                new ApplicationUser {  UserName = "user1", PasswordHash = passwordHash.HashPassword("12345"), SecurityStamp="randomString" },
+                new ApplicationUser {  UserName = "user2", PasswordHash = passwordHash.HashPassword("qwerty"), SecurityStamp="Cuz its necessary"}
             };
 
             var UserProfiles = new List<UserProfile>

@@ -37,9 +37,6 @@ namespace TestAppysGalkin.Web
 
         private static void RegisterDependencies()
         {
-            /*Container.RegisterType<HttpContextBase>(new InjectionFactory(_ =>
-    new HttpContextWrapper(HttpContext.Current)));*/
-
             Container.RegisterType<IProductRepository, ProductRepository>();
             Container.RegisterType<IUserRepository, UserRepository>();
             Container.RegisterType<IProducerRepository, ProducerRepository>();

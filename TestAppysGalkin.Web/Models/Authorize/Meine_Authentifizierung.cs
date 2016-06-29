@@ -12,29 +12,12 @@ namespace TestAppysGalkin.Web.Models.Authorize
     {
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
+            var authorized = base.AuthorizeCore(httpContext);
+            if (!authorized)
+            {
+                return false;
+            }
             return true;
         }
-
-        protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
-        {
-            filterContext.Result = new RedirectToRouteResult(new
-                RouteValueDictionary(new { controller = "Security", action = "AccessDenied" }));
-
-        }
-
-        public override void OnAuthorization(AuthorizationContext filterContext)
-        {
-            if (HttpContext.Current.Session["UserProfile"] == null)
-            {
-                filterContext.Result = filterContext.Result = new HttpUnauthorizedResult();
-            }
-
-            else
-            {
-                // аутентификация прошла успешна
-                base.OnAuthorization(filterContext);
-            }
-        }
-
     }
 }

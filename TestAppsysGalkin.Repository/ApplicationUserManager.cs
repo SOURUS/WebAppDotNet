@@ -13,5 +13,6 @@ namespace TestAppsysGalkin.Data.Model.Identity
                 : base(store)
         {
         }
+
     }
 }

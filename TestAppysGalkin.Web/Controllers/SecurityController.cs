@@ -1,12 +1,19 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.Owin.Security;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using Microsoft.Owin.Host.SystemWeb;
 using System.Web.Mvc;
+using TestAppsysGalkin.Data.Model;
 using TestAppsysGalkin.Repository.Interfaces;
 using TestAppysGalkin.Web.Models.Authorize;
 using TestAppysGalkin.Web.Models.Shared;
 using TestAppysGalkin.Web.ViewModels.Security;
+using System.Net;
+using System.Web;
 
 namespace TestAppysGalkin.Web.Controllers
 {
@@ -19,6 +26,14 @@ namespace TestAppysGalkin.Web.Controllers
             _user = userRepository;
         }
 
+        private IAuthenticationManager AuthenticationManager
+        {
+            get
+            {
+                return HttpContext.GetOwinContext().Authentication;
+            }
+        }
+
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
@@ -26,39 +41,36 @@ namespace TestAppysGalkin.Web.Controllers
             return View();
         }
 
-        [Meine_Authentifizierung]
         public ActionResult Logout()
         {
-            this.Session["UserProfile"] = null;
+            AuthenticationManager.SignOut();
             return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]
         [AllowAnonymous]
-        public ActionResult Login(LoginModel model, string returnUrl)
+        public async Task<ActionResult> Login(LoginModel model, string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
 
             if (ModelState.IsValid)
             {
-                UserProfileSessionData User = ValidateUser(model.Name, model.Password);
-                if (User == null)
+                ClaimsIdentity claim = await ValidateUser(model.Name, model.Password);
+                if (claim == null)
                 {
                     ModelState.AddModelError("", "Связка пароля и логина не верна!");
                     return View();
                 }
-                // записываем сессию в памяти сервера... bad practice 
-                this.Session["UserProfile"] = User;
-
-                //отправляем авторизованного куда он хотел
-                if (returnUrl!=null)
-                    return Redirect(returnUrl);
-
-                return RedirectToAction("Index", "User");
+                else
+                {
+                    AuthenticationManager.SignIn(new AuthenticationProperties
+                    {
+                        IsPersistent = true
+                    }, claim);
+                    return RedirectToAction("Index", "User");
+                }
             }
-
-            ModelState.AddModelError("", "Введите данные!");
-            return View();
+            return RedirectToAction("Index", "Home");
         }
 
         [AllowAnonymous]
@@ -67,14 +79,20 @@ namespace TestAppysGalkin.Web.Controllers
             return View();
         }
 
-        private UserProfileSessionData ValidateUser(string login, string password)
+        private async Task<ClaimsIdentity> ValidateUser(string login, string password)
         {
-            //чекаем пользователя, передаем пароль как есть по http
-           // var user = _user.AuthorizeUser(login, password);
-            if (user!=null)
-                return new UserProfileSessionData { UserId = user.UserId, Login = user.Login};
+            ClaimsIdentity claim = null;
+            var passwordHash = new PasswordHasher();
+            var pas = passwordHash.HashPassword(password);
+            // находим пользователя
+            // TO DO: вынести в отдельный сервис
+            ApplicationUser user = await _user.UserManager.FindAsync(login, password);
 
-            return null;
+            if (user != null)
+                claim = await _user.UserManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
+            
+
+            return claim;
         }
     }
 }
