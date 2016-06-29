@@ -16,14 +16,25 @@ namespace TestAppsysGalkin.Data.Context
         protected override void Seed(MainContext context)
         {
             //base.Seed(context);
-            var Users = new List<User>
+            var Users = new List<ApplicationUser>
             {
-                new User { Login = "user1", Password = "12345" },
-                new User { Login = "user2", Password = "qwerty" }
+                new ApplicationUser {  UserName = "user1", PasswordHash = "12345"},
+                new ApplicationUser {  UserName = "user2", PasswordHash = "qwerty"}
             };
 
+            var UserProfiles = new List<UserProfile>
+            {
+                new UserProfile { UserId = Users[0].Id},
+                new UserProfile { UserId = Users[1].Id }
+            };
+            
             Users.ForEach(s => context.Users.Add(s));
+            UserProfiles.ForEach(s => context.UserProfiles.Add(s));
 
+            var Message = new Message { FromUser = UserProfiles[0], ToUser = UserProfiles[1], Text = "Default message from user1 to user2" };
+            context.Messages.Add(Message);
+            context.SaveChanges();
+            
             var Producers = new List<Producer>
             {
                 new Producer {Name="Beats" },

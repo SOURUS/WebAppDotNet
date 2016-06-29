@@ -25,11 +25,11 @@ namespace TestAppysGalkin.Web.App_Start
 
                 config.CreateMap<Message, RecievedMessageViewModel>()
                     .ForMember(d => d.Name,
-                        opt => opt.MapFrom(src => src.FromUser.Login));
+                        opt => opt.MapFrom(src => src.FromUser.ApplicationUser.UserName));
                     
                 config.CreateMap<Message, SentMessageViewModel>()
                     .ForMember(d => d.Name,
-                        opt => opt.MapFrom(src => src.ToUser.Login));
+                        opt => opt.MapFrom(src => src.ToUser.ApplicationUser.UserName));
             });
         }
     }

@@ -12,12 +12,12 @@ namespace TestAppsysGalkin.Repository.Interfaces
         /// <summary>
         /// Получить коллекцию полученных сообщений
         /// </summary>
-        IEnumerable<Message> ReceivedMessages(int UserId);
+        IEnumerable<Message> ReceivedMessages(string UserId);
 
         /// <summary>
         /// Получить коллекцию отправленных сообщений
         /// </summary>
-        IEnumerable<Message> SentMessages(int UserId);
+        IEnumerable<Message> SentMessages(string UserId);
 
         /// <summary>
         /// Сохранить изменения
@@ -27,6 +27,6 @@ namespace TestAppsysGalkin.Repository.Interfaces
         /// <summary>
         /// Отправить сообщение
         /// </summary>
-        void CreateMessage(int FromUserId, string ToUserName, string msg);
+        void CreateMessage(string FromUserId, string ToUserName, string msg);
     }
 }

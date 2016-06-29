@@ -5,25 +5,16 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using TestAppsysGalkin.Data.Model;
+using TestAppsysGalkin.Data.Model.Identity;
 
 namespace TestAppsysGalkin.Repository.Interfaces
 {
     public interface IUserRepository : IDisposable
     {
-        /// <summary>
-        /// Получить коллекцию всех пользователей
-        /// </summary>
-        IEnumerable<User> GetAll();
+        ApplicationUserManager UserManager { get; }
+        IClientManager ClientManager { get; }
+        ApplicationRoleManager RoleManager { get; }
 
-        /// <summary>
-        /// Получить пользователя по UserId
-        /// </summary>
-        User GetUser(int Id);
-
-        /// <summary>
-        /// Получить пользователя по паролю и логину
-        /// </summary>
-        User AuthorizeUser(string login, string password);
-        //void Remove(K Id);
+        Task SaveAsync();
     }
 }

@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace TestAppsysGalkin.Data.Model
 {
-    public class User
+    public class UserProfile
     {
-        public int UserId { get; set; }
+        [Key, ForeignKey("ApplicationUser")]
+        public string UserId { get; set; }
 
-        public string Login { get; set; }
-
-        public string Password { get; set; }
+        public virtual ApplicationUser ApplicationUser { get; set; }
 
         public virtual ICollection<Message> ReceivedMessages { get; set; }
 

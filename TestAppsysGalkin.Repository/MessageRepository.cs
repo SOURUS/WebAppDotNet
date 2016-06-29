@@ -19,23 +19,23 @@ namespace TestAppsysGalkin.Repository
             _context = new MainContext();
         }
 
-        public IEnumerable<Message> SentMessages(int UserId)
+        public IEnumerable<Message> SentMessages(string UserId)
         {
             return _context.Messages.Where(m => m.FromUserId == UserId).ToList();
         }
 
-        public IEnumerable<Message> ReceivedMessages(int UserId)
+        public IEnumerable<Message> ReceivedMessages(string UserId)
         {
             return _context.Messages.Where(m => m.ToUserId == UserId).ToList();
         }
 
-        public void CreateMessage(int FromUserId, string ToUserName, string msg)
+        public void CreateMessage(string FromUserId, string ToUserName, string msg)
         {
             _context.Messages.Add(new Message
             {
                 Text = msg,
-                ToUser = _context.Users.Single(u => u.Login == ToUserName),
-                FromUser = _context.Users.Single(u=>u.UserId == FromUserId)
+                ToUser = _context.UserProfiles.Single(u => u.ApplicationUser.UserName == ToUserName),
+                FromUser = _context.UserProfiles.Single(u=>u.UserId == FromUserId)
             });
 
             Save();

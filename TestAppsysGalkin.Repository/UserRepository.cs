@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -6,50 +7,75 @@ using System.Text;
 using System.Threading.Tasks;
 using TestAppsysGalkin.Data.Context;
 using TestAppsysGalkin.Data.Model;
+using TestAppsysGalkin.Data.Model.Identity;
 using TestAppsysGalkin.Repository.Interfaces;
 
 namespace TestAppsysGalkin.Repository
 {
     public class UserRepository : IUserRepository
     {
-        private readonly MainContext _context;
-        private bool disposed = false;
+        private MainContext db;
+
+        private ApplicationUserManager userManager;
+        private ApplicationRoleManager roleManager;
+        private IClientManager clientManager;
 
         public UserRepository()
         {
-            _context = new MainContext();
+            db = new MainContext();
+            userManager = new ApplicationUserManager(new UserStore<ApplicationUser>(db));
+            roleManager = new ApplicationRoleManager(new RoleStore<ApplicationRole>(db));
+            clientManager = new ClientManager(db);
         }
 
-        public User GetUser(int Id)
+        public ApplicationUserManager UserManager
         {
-            return _context.Users.Single(u => u.UserId == Id);
-        }
-
-        public IEnumerable<User> GetAll()
-        {
-            return _context.Users.ToList();
-        }
-
-        public User AuthorizeUser(string login, string password)
-        {
-            User user = _context.Users.SingleOrDefault(u => u.Login == login && u.Password == password);
-            return user;
-        }
-
-        public virtual void Dispose(bool disposing)
-        {
-            if (!this.disposed){
-                if (disposing){
-                    _context.Dispose();
-                }
+            get
+            {
+                return userManager;
             }
-            this.disposed = true;
+        }
+
+        public IClientManager ClientManager
+        {
+            get
+            {
+                return clientManager;
+            }
+        }
+
+        public ApplicationRoleManager RoleManager
+        {
+            get
+            {
+                return roleManager;
+            }
+        }
+
+        public async Task SaveAsync()
+        {
+            await db.SaveChangesAsync();
         }
 
         public void Dispose()
         {
             Dispose(true);
             GC.SuppressFinalize(this);
+        }
+        private bool disposed = false;
+
+        public virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    userManager.Dispose();
+                    roleManager.Dispose();
+                    clientManager.Dispose();
+                }
+                this.disposed = true;
+            }
         }
     }
 }

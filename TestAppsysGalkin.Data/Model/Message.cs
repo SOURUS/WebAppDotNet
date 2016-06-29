@@ -15,12 +15,12 @@ namespace TestAppsysGalkin.Data.Model
         [MaxLength(1000)]
         public string Text { get; set; }
 
-        public int FromUserId { get; set; }
+        public string FromUserId { get; set; }
 
-        public int ToUserId { get; set; }
+        public string ToUserId { get; set; }
 
-        public virtual User FromUser { get; set; }
+        public virtual UserProfile FromUser { get; set; }
 
-        public virtual User ToUser { get; set; }
+        public virtual UserProfile ToUser { get; set; }
     }
 }

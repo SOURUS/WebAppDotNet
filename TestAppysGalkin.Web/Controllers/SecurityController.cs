@@ -70,7 +70,7 @@ namespace TestAppysGalkin.Web.Controllers
         private UserProfileSessionData ValidateUser(string login, string password)
         {
             //чекаем пользователя, передаем пароль как есть по http
-            var user = _user.AuthorizeUser(login, password);
+           // var user = _user.AuthorizeUser(login, password);
             if (user!=null)
                 return new UserProfileSessionData { UserId = user.UserId, Login = user.Login};
 
