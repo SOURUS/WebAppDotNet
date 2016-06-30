@@ -242,6 +242,7 @@
     <Content Include="Content\Images\Sennheiser_Momentum.jpg" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Less\Site.css" />
     <Content Include="Content\ngDialog\ngDialog-theme-default.css" />
     <Content Include="Content\ngDialog\ngDialog.css" />
     <Content Include="Content\ngDialog\ngDialog.min.css" />
@@ -282,6 +283,7 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="Properties\PublishProfiles\1.pubxml" />
     <None Include="Properties\PublishProfiles\a.pubxml" />
     <Content Include="Scripts\Libraries\AngularJS\Source\angular.min.js.map" />
     <Content Include="Scripts\Libraries\AngularJS\ngAnimate\angular-animate.min.js.map" />
@@ -331,7 +333,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

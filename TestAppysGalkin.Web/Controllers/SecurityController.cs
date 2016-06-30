@@ -63,6 +63,7 @@ namespace TestAppysGalkin.Web.Controllers
                 }
                 else
                 {
+                    AuthenticationManager.SignOut();
                     AuthenticationManager.SignIn(new AuthenticationProperties
                     {
                         IsPersistent = true
@@ -90,7 +91,6 @@ namespace TestAppysGalkin.Web.Controllers
 
             if (user != null)
                 claim = await _user.UserManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
-            
 
             return claim;
         }

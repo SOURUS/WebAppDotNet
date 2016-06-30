@@ -7,7 +7,7 @@
 
 <div id="main" ng-controller="IndexController" ng-cloak>
 
-    <div class="row">
+    <div class="row the-list" >
         <div class="col-md-3">
             <div class="sidebar-nav">
                 <div class="navbar navbar-default" role="navigation">
@@ -74,33 +74,34 @@
         </div>
 
         <div class="cheat">cheat</div>
+            <div class="col-md-9">
+                <div class="row  bu .box-container">
+                    <div class="col-md-3 col-sm-6 col-xs-12 " dir-paginate="item in Result | filter:HeadPhoneFilter | itemsPerPage: Paging.itemsPerPage" current-page="Paging.currentPage">
+                        <div class="product_cell">
+                            <div class="imgbox">
+                                <img data-ng-src="{{item.Image}}" class='img-responsive col-xs-12' />
+                            </div>
 
-        <div class="col-md-9">
-            <ul id="HD_container">
-                <li dir-paginate="item in Result | filter:HeadPhoneFilter | itemsPerPage: Paging.itemsPerPage" current-page="Paging.currentPage">
+                            <div class="Producer">
+                                {{item.Producer.Name}}
+                            </div>
 
-                    <div class="imgbox">
-                        <img data-ng-src="{{item.Image}}" />
+                            <div class="Model">
+                                {{item.Name}}
+                            </div>
+
+                            <div class="Price">
+                                {{item.Price}} руб.
+                            </div>
+
+                            <div class="Order">
+                                <button type="button" class="btn btn-primary btn-xs" ng-click="GoOrder(item)">Заказать</button>
+                            </div>
+                        </div>
+
                     </div>
-
-                    <div class="Producer">
-                        {{item.Producer.Name}}
-                    </div>
-
-                    <div class="Model">
-                        {{item.Name}}
-                    </div>
-
-                    <div class="Price">
-                        {{item.Price}} руб.
-                    </div>
-
-                    <div class="Order">
-                        <button type="button" class="btn btn-primary btn-xs" ng-click="GoOrder(item)">Заказать</button>
-                    </div>
-                </li>
-            </ul>
-        </div>
+                 </div>
+            </div>
     </div>
 
 </div>
@@ -113,3 +114,34 @@
         });}
     );
 </script>
+
+
+@*
+
+    <div class="col-md-9">
+                <ul id="HD_container">
+                    <li dir-paginate="item in Result | filter:HeadPhoneFilter | itemsPerPage: Paging.itemsPerPage" current-page="Paging.currentPage">
+
+                        <div class="imgbox">
+                            <img data-ng-src="{{item.Image}}" />
+                        </div>
+
+                        <div class="Producer">
+                            {{item.Producer.Name}}
+                        </div>
+
+                        <div class="Model">
+                            {{item.Name}}
+                        </div>
+
+                        <div class="Price">
+                            {{item.Price}} руб.
+                        </div>
+
+                        <div class="Order">
+                            <button type="button" class="btn btn-primary btn-xs" ng-click="GoOrder(item)">Заказать</button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+*@

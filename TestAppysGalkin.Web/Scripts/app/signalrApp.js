@@ -14,7 +14,7 @@
             proxy: null,
 
             init: function () {
-                $.connection.hub.logging = true;
+                $.connection.hub.logging = false;
                 var d = $q.defer();
                 this.promises.push($.connection.hub.start())
                 this.proxy = $.connection.MainHub;

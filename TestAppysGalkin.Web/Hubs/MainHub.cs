@@ -17,9 +17,10 @@ namespace TestAppysGalkin.Web.Hubs
 
         public void SendMessage(string user, string message)
         {
-            hubContext.Clients.Group(user).updateMessages(message);
-            //string name = HttpContext.Current.User.Identity.Name; // Context.User.Identity.Name is null, very funny
-            //hubContext.Clients.All.updateMessages("Было отправлено сообщение");
+            string name = HttpContext.Current.User.Identity.Name;
+
+            if (name!=null)
+                hubContext.Clients.Group(user).updateMessages(message);
         }
 
         public void GreetAll()
@@ -30,7 +31,9 @@ namespace TestAppysGalkin.Web.Hubs
         public override Task OnConnected()
         {
             string name = Context.User.Identity.Name;
-            Groups.Add(Context.ConnectionId, name);
+
+            if (name!=null)
+                Groups.Add(Context.ConnectionId, name);
 
             return base.OnConnected();
         }

@@ -1,0 +1,254 @@
+﻿* {
+  padding: 0;
+  margin: 0;
+}
+body {
+  padding-top: 70px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+#core_body {
+  width: 80%;
+  margin: 0 auto;
+  height: 100%;
+}
+.container {
+  width: 100%;
+  margin: 0 auto;
+}
+.otstup10 {
+  margin-top: 10px;
+}
+.otstup20 {
+  margin-top: 20px;
+}
+.otstup30 {
+  margin-top: 30px;
+}
+.TopMenu {
+  float: left;
+  position: relative;
+  width: 100%;
+}
+#HD_container {
+  position: relative;
+  width: 100%;
+  height: auto;
+  list-style-type: none;
+  margin: 0 auto;
+}
+#HD_container li {
+  position: relative;
+  padding: 5px 10px;
+  border: 1px solid #3272e5;
+  margin: 0 auto;
+  margin: 5px 5px;
+  display: inline-block;
+  width: 200px;
+  height: 250px;
+  text-align: center;
+}
+#HD_container li .imgbox {
+  position: relative;
+  overflow: hidden;
+  margin: 0 auto;
+  margin-top: 10px;
+  width: 145px!important;
+  height: 145px!important;
+}
+#HD_container li .imgbox img {
+  height: inherit;
+  width: inherit;
+}
+#HD_container li .Producer {
+  text-align: left;
+  font-size: 10pt;
+}
+#HD_container li .Model {
+  text-align: left;
+  font-weight: bold;
+}
+#HD_container li .Price {
+  text-align: left;
+  margin-top: 5px;
+}
+#HD_container li .Order {
+  text-align: left;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 5px 5px;
+}
+.cheat {
+  color: #fff;
+}
+.PagingFilter {
+  position: static;
+  float: left;
+  padding: 8px;
+  border-radius: 5px;
+  background-color: #A4CEEF;
+  width: 100%;
+}
+.PagingFilter .paging {
+  position: static;
+  display: inline-block;
+  float: right;
+  height: 35px;
+}
+.PagingFilter .value {
+  height: 20px;
+  position: relative;
+  display: inline-block;
+  float: left;
+  height: 35px;
+}
+.pagination {
+  margin: 0 0 !important;
+}
+.nya-bs-select.btn-group .dropdown-menu li.selected a .default-mark {
+  display: none;
+}
+.nya-bs-select.btn-group .dropdown-menu li a span.default-mark {
+  position: absolute;
+  display: inline-block;
+  right: 15px;
+  margin-top: 5px;
+  margin-left: 5px;
+}
+/*CUSTOM*/
+input.custom-input {
+  border: 1px solid #ccc;
+  border-radius: 5px 5px;
+  height: 35px;
+  padding-left: 5px;
+  padding-right: 5px;
+  outline: none;
+  width: 100%;
+}
+input.custom-input:focus {
+  box-shadow: 0 0 3px 2px #118deb;
+}
+input.custom-input::-ms-clear {
+  display: none;
+}
+#UserMenu {
+  list-style: none;
+}
+#UserMenu li {
+  margin: 5px 5px;
+}
+.addTable {
+  margin: 0;
+  margin-top: 3px;
+  width: 100%;
+  border: solid 0px;
+  min-height: 100%;
+}
+.addTable td {
+  padding: 3px 3px;
+}
+.addTable textarea {
+  width: 100%;
+}
+/* Серая таблица:) */
+.grey_table {
+  margin: 0 10px;
+  /*border-bottom: 1px solid #c0c0c0;*/
+}
+.grey_table button {
+  background-color: #fff;
+}
+.grey_table.grey-table-none-bottom-border {
+  border-bottom: none;
+}
+.k-grid.grey_table th.k-header,
+.grey_table th,
+.grey_table td {
+  text-align: left;
+  padding: 8px 20px;
+}
+.grey_table th:first-child,
+.grey_table td:first-child {
+  padding-left: 5px;
+}
+.grey_table th:last-child,
+.grey_table td:last-child {
+  padding-right: 5px;
+}
+.grey_table thead tr {
+  background-color: transparent;
+  color: #969696;
+  font-size: 13px;
+  border-bottom: 1px #c0c0c0 solid;
+}
+.grey_table thead td,
+.grey_table thead th {
+  padding-bottom: 8px;
+}
+
+
+/*div {
+    border: dashed 1px red;
+}*/
+
+.product_cell {
+    max-height:inherit;
+    max-width:inherit;
+    position: relative;
+
+}
+
+.product_cell imgbox img{
+
+    max-width:100%;
+max-height:100%;
+}
+
+.product_cell .Producer {
+  text-align: left;
+  font-size: 10pt;
+}
+.product_cell .Model {
+  text-align: left;
+  font-weight: bold;
+}
+.product_cell .Price {
+  text-align: left;
+  margin-top: 5px;
+}
+.product_cell .Order {
+  text-align: left;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 5px 5px;
+}
+
+.box-container { 
+    background-color:red;
+}
+
+.equal {
+  display: flex;
+  flex-wrap: wrap;
+}
+    
+.equal > div[class*='col-'] {  
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+.bu {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.bu > div[class*='col-'] {  
+    margin:10px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #3272e5;
+}
